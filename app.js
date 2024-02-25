@@ -34,12 +34,13 @@ app.get("/test", (req, res) => {
     message: "Hello",
   });
 });
-app.use("/user", verifyToken, checkRole(), userRoute);
+// app.use("/user", verifyToken, checkRole(), userRoute);
+app.use("/user", userRoute);
 app.use("/DevJourney", authRoute);
 
 //stories
-app.use("/story", verifyToken, checkRole(), storsRoute);
-// app.use("/story", storsRoute);
+// app.use("/story", verifyToken, checkRole(), storsRoute);
+app.use("/story", storsRoute);
 
 connect();
 app.listen(PORT, () => {
