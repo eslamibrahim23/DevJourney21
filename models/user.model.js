@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { joiPasswordExtendCore } = require('joi-password');
+const { joiPasswordExtendCore } = require("joi-password");
 const JoiPassword = Joi.extend(joiPasswordExtendCore);
 
 const userSchema = new mongoose.Schema(
@@ -45,8 +45,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "user",
-      enum: ["admin", "user"],
+      default:"user",
+      enum: ["user", "admin"],
     },
     phone: {
       type: String,

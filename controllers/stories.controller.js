@@ -13,6 +13,7 @@ const createStories = async (req, res,next) => {
   try {
     const { title, body, category, coverfile, covertype } = req.body;
 
+    console.log(coverfile);
     const createstory = await Story.create({
       title,
       body,
@@ -20,7 +21,9 @@ const createStories = async (req, res,next) => {
       category,
       coverfile,
       covertype,
+      // covertype,
     });
+
     return res.json({ createstory, status: "success" });
   } catch (error) {
     console.log(error);

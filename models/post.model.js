@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-
 const postSchema = new mongoose.Schema(
   {
     title: {
@@ -24,7 +23,6 @@ const postSchema = new mongoose.Schema(
     },
     coverfile: {
       type: String,
-      default: "none",
     },
     covertype: {
       type: String,
@@ -41,29 +39,32 @@ const validationSchema = Joi.object({
   body: Joi.string().required(),
   createdBy: Joi.object().required(),
   category: Joi.string().required(),
-  coverfile: Joi.string(),
-  covertype: Joi.string(),
-  createdAt:Joi.date(),
-  updatedAt:Joi.date(),
+
+  coverfile: Joi.string().allow(''),
+  covertype: Joi.string()
+  .empty('')
+  .default('default value'),
+  createdAt: Joi.date(),
+  updatedAt: Joi.date(),
 });
 
 // Mongoose pre-save hook for validation
 postSchema.pre("save", function (next) {
   const validation = validationSchema.validate(this.toObject());
   if (validation.error) {
-    const err= validation.error.details[0].message;
+    // console.log("joy error",err);
+    const err = validation.error.details[0].message;
+    console.log("joy error", err);
     // Handle validation error (throw an error or handle it based on your application logic)
-    return Promise.reject('Validation Error: ' + validation.error.details[0].message); // Reject the Promise with the validation error
+    return Promise.reject(
+      "Validation Error: " + validation.error.details[0].message
+    ); // Reject the Promise with the validation error
     next(res.json({ err, status: "failed! " }));
   } else {
     // Validation successful, continue with the save operation
     next();
   }
 });
-
-
-
-
 
 const Post = mongoose.model("Post112", postSchema);
 
