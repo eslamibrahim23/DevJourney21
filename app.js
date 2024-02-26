@@ -35,11 +35,10 @@ app.get("/test", (req, res) => {
   });
 });
 app.use("/user", verifyToken, checkRole(), userRoute);
-app.use("/user", verifyToken, checkRole(), userRoute);
 app.use("/DevJourney", authRoute);
 
 //stories
-app.use("/story", verifyToken, checkRole(), storsRoute);
+app.use("/story", verifyToken, storsRoute);
 // app.use("/story", storsRoute);
 
 connect();
