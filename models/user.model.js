@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const { joiPasswordExtendCore } = require('joi-password');
+const JoiPassword = Joi.extend(joiPasswordExtendCore);
 
 const userSchema = new mongoose.Schema(
   {
@@ -90,7 +92,7 @@ const validationSchema = Joi.object({
   location: Joi.string(),
   bio: Joi.string(),
   username: Joi.string(),
-  password: Joi.string()
+  password: JoiPassword.string()
     .min(8)
     .minOfLowercase(1)
     .minOfUppercase(1)
