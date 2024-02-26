@@ -103,7 +103,7 @@ const validationSchema = Joi.object({
   address: Joi.object(),
   gender: Joi.string(),
   role: Joi.string(),
-  phoneNumber: Joi.number().max(11),
+  phone: Joi.number().max(11),
   isActive: Joi.boolean(),
   createdAt: Joi.date(),
   updatedAt: Joi.date(),
