@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      defualt: "user",
+      default: "user",
       enum: ["admin", "user"],
     },
     phone: {
