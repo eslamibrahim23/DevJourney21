@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
       // required: true,
       enum: ["admin", "user"],
     },
-    phoneNumber: {
+    phone: {
       type: String,
       // required: true,
       validate: {
@@ -60,6 +60,19 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: true,
     },
+
+    occupation: {
+      type: string,
+    },
+    location: {
+      type: string,
+    },
+    bio: {
+      type: string,
+    },
+    username: {
+      type: string,
+    },
   },
   { timestamps: true }
 );
@@ -67,27 +80,42 @@ const userSchema = new mongoose.Schema(
 // Joi validation schema
 const validationSchema = Joi.object({
   _id: Joi.required(),
-  firstname: Joi.string().min(3).max(20).required(),
-  lastname: Joi.string().min(3).max(20).required(),
-  email: Joi.string().max(40).required(),
-  password: Joi.string().required(),
+  firstname: Joi.string().min(3).required(),
+  lastname: Joi.string().min(3).required(),
+  email: Joi.string().email({
+    minDomainSegments: 2,
+    tlds: { allow: ["com", "net"] },
+  }),
+  occupation: Joi.string(),
+  location: Joi.string(),
+  bio: Joi.string(),
+  username: Joi.string(),
+  password: Joi.string()
+    .min(8)
+    .minOfLowercase(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
+    .required(),
+
   age: Joi.number(),
   address: Joi.object(),
   gender: Joi.string(),
   role: Joi.string(),
   phoneNumber: Joi.number().max(11),
   isActive: Joi.boolean(),
-  createdAt:Joi.date(),
-  updatedAt:Joi.date(),
+  createdAt: Joi.date(),
+  updatedAt: Joi.date(),
 });
 
 // Mongoose pre-save hook for validation
 userSchema.pre("save", function (next) {
   const validation = validationSchema.validate(this.toObject());
   if (validation.error) {
-    const err= validation.error.details[0].message;
+    const err = validation.error.details[0].message;
 
-    return Promise.reject('Validation Error: ' + validation.error.details[0].message); // Reject the Promise with the validation error
+    return Promise.reject(
+      "Validation Error: " + validation.error.details[0].message
+    ); // Reject the Promise with the validation error
     // Handle validation error (throw an error or handle it based on your application logic)
     next(res.json({ err, status: "failed! " }));
   } else {

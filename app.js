@@ -35,7 +35,8 @@ app.get("/test", (req, res) => {
   });
 });
 app.use("/user", verifyToken, checkRole(), userRoute);
-app.use("/user", authRoute);
+app.use("/user", verifyToken, checkRole(), userRoute);
+app.use("/DevJourney", authRoute);
 
 //stories
 app.use("/story", verifyToken, checkRole(), storsRoute);

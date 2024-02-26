@@ -1,7 +1,8 @@
-documentaion to use  DevJourney api
+
 
 to register and login
-user/signup
+DevJourney/signup
+
 {
   "firstname": "esfsdfsdfsd",
   "lastname": "eslam12211fsdfsdfsdfsdfsdfsdfsdfdffdsfsdfsdfdss",
@@ -18,11 +19,17 @@ user/signup
    "isActive":true
 }
 
-user/login
+
+
+DevJourney/login
+
 {
   "email": "esladm@1234b12d1899nnggby1ynm1",
   "password": "asd"
 }
+
+
+
 
 to get all user
 user/getall
@@ -32,8 +39,20 @@ to update user by id using (patch)
 to delete user by id
 user/:id
 
+
+
+
+
+
+
+
+
+
+
+
 to creat story
 story/create
+
 {
   "title": "story20",
 "body": "eslam1221",
@@ -41,6 +60,8 @@ story/create
 "coverfile": "Biographical",
 "covertype": "Biographical"
 }
+
+
 
 to get all stories
 story/getall
