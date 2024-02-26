@@ -62,16 +62,16 @@ const userSchema = new mongoose.Schema(
     },
 
     occupation: {
-      type: string,
+      type: String,
     },
     location: {
-      type: string,
+      type: String,
     },
     bio: {
-      type: string,
+      type: String,
     },
     username: {
-      type: string,
+      type: String,
     },
   },
   { timestamps: true }
