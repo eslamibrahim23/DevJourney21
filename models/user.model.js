@@ -59,10 +59,9 @@ const userSchema = new mongoose.Schema(
     },
     isActive: {
       type: Boolean,
-      required: true,
       default: true,
+      enum: [true, false],
     },
-
     occupation: {
       type: String,
     },
