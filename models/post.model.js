@@ -39,8 +39,9 @@ const validationSchema = Joi.object({
   body: Joi.string().required(),
   createdBy: Joi.object().required(),
   category: Joi.string().required(),
-
+  ///if i need to receive empty 
   coverfile: Joi.string().allow(''),
+    ///if i need to receive empty or this
   covertype: Joi.string()
   .empty('')
   .default('default value'),

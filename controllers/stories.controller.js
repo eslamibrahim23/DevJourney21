@@ -45,6 +45,7 @@ const getStories = async (req, res,next) => {
 const getStoryById = async (req, res, next) => {
   try {
     const id = req.params.id;
+    console.log(id);
     const findById = await Story.findById(id).populate("createdBy");
     res.json({ findById });
   } catch (error) {

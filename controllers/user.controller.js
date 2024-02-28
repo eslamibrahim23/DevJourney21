@@ -17,7 +17,7 @@ const getUserById = async (req, res, next) => {
     res.json({ findById });
   } catch (error) {
     res.json({
-      statud: "User Not found go to Register page",
+      status: "User Not found go to Register page",
     });
     next();
   }
@@ -30,12 +30,13 @@ const updateUser = async (req, res, next) => {
       new: true,
     });
     console.log(updated);
-    res.send(updated);
+    res.json(updated);
   } catch (error) {
-    console.log(error);
-    // res.json({
-    //   statud: "User Not found go to Register page",
-    // });
+    // console.log(error);
+    res.json({
+      error:error,
+      status: "User Not found go to Register page",
+    });
     next();
   }
 };
