@@ -19,6 +19,7 @@ const signup = async (req, res, next) => {
       lastname,
       email,
       password: hashedPassword,
+      role: role?role:"user"
     });
 
     return res.status(201).json({ status: "success" });
