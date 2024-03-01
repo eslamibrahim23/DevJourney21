@@ -128,13 +128,10 @@ const onpagination = async (req, res, next) => {
   }
 };
 
-
-const getAllUserPosts =async (req, res) => {
+const getAllUserPosts = async (req, res) => {
   try {
-    const idd = req.userOrAdmin._id;
-    console.log(idd);
-
-    const findpostsofuser = await Story.find({ "createdBy":idd});
+    const id = req.params.id;
+    const findpostsofuser = await Story.find({ createdBy: id });
     res.json(findpostsofuser);
   } catch (eror) {
     console.log(eror);
