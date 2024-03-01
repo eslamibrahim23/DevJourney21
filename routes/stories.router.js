@@ -7,6 +7,7 @@ const {
   updateStory,
   filterByTitle,
   onpagination,
+  getAllUserPosts,
 } = require("../controllers/stories.controller");
 
 router.route("/create").post(createStories);
@@ -19,4 +20,6 @@ router.patch("/:id", updateStory);
 router.delete("/:id", deleteStory);
 
 router.route("/filter/:title").get(filterByTitle);
+
+router.route("/nooott").get(getAllUserPosts);
 module.exports = router;

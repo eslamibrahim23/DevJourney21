@@ -6,10 +6,12 @@ const userRoute = require("./routes/user.route");
 const authRoute = require("./routes/auth.router");
 
 const storsRoute = require("./routes/stories.router");
+const storiesuserRoute = require("./routes/storiesuserRoute");
 const connect = require("./dataBase/connectToDB");
 
 const { verifyToken, checkRole } = require("./middleware/auth");
 const User = require("./models/user.model");
+const story = require("./models/post.model");
 
 dotenv.config();
 const app = express();
@@ -38,14 +40,13 @@ app.use("/user", verifyToken, checkRole(), userRoute);
 app.use("/DevJourney", authRoute);
 
 //stories
-app.use("/story", verifyToken, storsRoute);
+app.use("/story", verifyToken, checkRole(), storsRoute);
+app.use("/stoybyuser", verifyToken, checkRole(), storiesuserRoute )
 // app.use("/story", storsRoute);
-
+// app.use("t",verifyToken,checkRole(),)
 connect();
 app.listen(PORT, () => {
   console.log(PORT, "server is running..");
 });
-
-
 
 

@@ -2,14 +2,25 @@ const Story = require("../models/post.model");
 
 //4-filter???????/////wait and pagination/////////
 
-
 //end for catrogies
+// const getAllUserPosts = async (req, res, next) => {
+//   try {
+//     const idd = req.userOrAdmin._id;
+//     console.log(idd);
 
+//     const finnnnnnd = await Story.find().populate("createdBy");
 
-
+//     // const findAll = await Story.find();
+//     // const findAll = await Story.find().limit(10);
+//     return res.json({ findAll, message: "api is working!" });
+//   } catch (error) {
+//     res.json({ status: "failed! can`t fetch storeis" });
+//     next();
+//   }
+// };
 
 let count = 10;
-const createStories = async (req, res,next) => {
+const createStories = async (req, res, next) => {
   try {
     const { title, body, category, coverfile, covertype } = req.body;
 
@@ -31,13 +42,13 @@ const createStories = async (req, res,next) => {
   }
 };
 
-const getStories = async (req, res,next) => {
+const getStories = async (req, res, next) => {
   try {
     const findAll = await Story.find();
     // const findAll = await Story.find().limit(10);
     return res.json({ findAll, message: "api is working!" });
   } catch (error) {
-     res.json({  status: "failed! can`t fetch storeis" });
+    res.json({ status: "failed! can`t fetch storeis" });
     next();
   }
 };
@@ -49,12 +60,15 @@ const getStoryById = async (req, res, next) => {
 
     const findById = await Story.findById(id).populate("createdBy");
     res.json({ findById });
+    console.log(findById);
   } catch (error) {
-    return console.log(error),
-    // res.json({
-    //  error: console.log(error),
-    //   statud: "Story Not found go to Create page",
-    // });
+    return (
+      console.log(error),
+      res.json({
+        error: console.log(error),
+        statud: "Story Not found go to Create page",
+      })
+    );
     next();
   }
 };
@@ -114,6 +128,22 @@ const onpagination = async (req, res, next) => {
   }
 };
 
+
+const getAllUserPosts =async (req, res) => {
+  try {
+    const idd = req.userOrAdmin._id;
+    console.log(idd);
+
+    const findpostsofuser = await Story.find({ "createdBy":idd});
+    res.json(findpostsofuser);
+  } catch (eror) {
+    console.log(eror);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 module.exports = {
   createStories,
   getStories,
@@ -122,4 +152,5 @@ module.exports = {
   deleteStory,
   filterByTitle,
   onpagination,
+  getAllUserPosts,
 };
