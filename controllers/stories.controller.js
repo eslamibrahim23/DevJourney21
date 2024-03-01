@@ -46,12 +46,15 @@ const getStoryById = async (req, res, next) => {
   try {
     const id = req.params.id;
     console.log(id);
+
     const findById = await Story.findById(id).populate("createdBy");
     res.json({ findById });
   } catch (error) {
-    res.json({
-      statud: "Story Not found go to Create page",
-    });
+    return console.log(error),
+    // res.json({
+    //  error: console.log(error),
+    //   statud: "Story Not found go to Create page",
+    // });
     next();
   }
 };
